@@ -1,0 +1,64 @@
+name: CI/CD Pipeline for Expo
+
+on:
+  push:
+    branches: [ develop ] # We'll use 'develop' as our working branch
+  pull_request:
+    branches: [ main ] # Run checks when a PR is made to main
+
+jobs:
+  # JOB 1: Quality Gate - Lint & Test
+  quality-gate:
+    name: Run Linter & Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test -- --watchAll=false --coverage
+
+  # JOB 2: Build & Deploy - Only runs if quality-gate passes AND we are on main
+  build-and-deploy:
+    name: Build for Android & iOS
+    runs-on: ubuntu-latest
+    needs: quality-gate # This job depends on the first one
+    # CRITICAL: This only runs after a PR is merged into the main branch
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }} # We will set this secret
+
+      - name: Build Android on EAS
+        run: eas build --platform android --non-interactive --no-wait
+
+      - name: Build iOS on EAS
+        run: eas build --platform ios --non-interactive --no-wait
