@@ -24,6 +24,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3a4a9a51-20a9-4bac-bcc0-b3b5634b1d87"
+      }
+    },
+    "owner": "khushi-lachhwani"
   }
 }
