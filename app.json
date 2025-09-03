@@ -17,10 +17,10 @@
       "bundleIdentifier": "com.khushi-lachhwani.ci-cd-demo"
     },
     "android": {
+      "package": "com.khushi-lachhwani.ci_cd_demo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "package": "com.khushi-lachhwani.ci_cd_demo"
+        "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
     },
