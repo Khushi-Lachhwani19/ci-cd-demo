@@ -14,10 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.khushi-lachhwani.ci-cd-demo"
+      "bundleIdentifier": "com.khushilachhwani.cicddemo"
     },
     "android": {
-      "package": "com.khushi-lachhwani.ci_cd_demo",
+      "package": "com.khushilachhwani.cicddemo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
