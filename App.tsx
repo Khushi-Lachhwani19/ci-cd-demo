@@ -6,6 +6,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
       <Text>demo of ci cd</Text>
+      <Text>React native</Text>
 
       <StatusBar style="auto" />
     </View>
